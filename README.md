@@ -1,3 +1,7 @@
+# Редактор родословных
+[![codecov](https://codecov.io/gh/genealogy-generator/genealogy-editor/branch/main/graph/badge.svg?token=4RDAMM5N1H)](https://codecov.io/gh/genealogy-generator/genealogy-editor)
+[![CI/CD](https://github.com/genealogy-generator/genealogy-editor/actions/workflows/main.yml/badge.svg)](https://github.com/genealogy-generator/genealogy-editor/actions/workflows/main.yml)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

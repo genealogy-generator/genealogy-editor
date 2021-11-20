@@ -1,23 +1,22 @@
 {
   "files": {
-    "main.css": "/genealogy-editor/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/genealogy-editor/static/js/main.7c6a0f18.chunk.js",
-    "main.js.map": "/genealogy-editor/static/js/main.7c6a0f18.chunk.js.map",
-    "runtime-main.js": "/genealogy-editor/static/js/runtime-main.9877ed46.js",
-    "runtime-main.js.map": "/genealogy-editor/static/js/runtime-main.9877ed46.js.map",
-    "static/js/2.6607a8c6.chunk.js": "/genealogy-editor/static/js/2.6607a8c6.chunk.js",
-    "static/js/2.6607a8c6.chunk.js.map": "/genealogy-editor/static/js/2.6607a8c6.chunk.js.map",
-    "static/js/3.c856b23c.chunk.js": "/genealogy-editor/static/js/3.c856b23c.chunk.js",
-    "static/js/3.c856b23c.chunk.js.map": "/genealogy-editor/static/js/3.c856b23c.chunk.js.map",
+    "main.css": "/genealogy-editor/static/css/main.b4965327.chunk.css",
+    "main.js": "/genealogy-editor/static/js/main.50ec1519.chunk.js",
+    "main.js.map": "/genealogy-editor/static/js/main.50ec1519.chunk.js.map",
+    "runtime-main.js": "/genealogy-editor/static/js/runtime-main.30cc12f0.js",
+    "runtime-main.js.map": "/genealogy-editor/static/js/runtime-main.30cc12f0.js.map",
+    "static/js/2.f34e8d60.chunk.js": "/genealogy-editor/static/js/2.f34e8d60.chunk.js",
+    "static/js/2.f34e8d60.chunk.js.map": "/genealogy-editor/static/js/2.f34e8d60.chunk.js.map",
+    "static/js/3.9b5e10c0.chunk.js": "/genealogy-editor/static/js/3.9b5e10c0.chunk.js",
+    "static/js/3.9b5e10c0.chunk.js.map": "/genealogy-editor/static/js/3.9b5e10c0.chunk.js.map",
     "index.html": "/genealogy-editor/index.html",
-    "static/css/main.8c8b27cf.chunk.css.map": "/genealogy-editor/static/css/main.8c8b27cf.chunk.css.map",
-    "static/js/2.6607a8c6.chunk.js.LICENSE.txt": "/genealogy-editor/static/js/2.6607a8c6.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/genealogy-editor/static/media/logo.6ce24c58.svg"
+    "static/css/main.b4965327.chunk.css.map": "/genealogy-editor/static/css/main.b4965327.chunk.css.map",
+    "static/js/2.f34e8d60.chunk.js.LICENSE.txt": "/genealogy-editor/static/js/2.f34e8d60.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.9877ed46.js",
-    "static/js/2.6607a8c6.chunk.js",
-    "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.7c6a0f18.chunk.js"
+    "static/js/runtime-main.30cc12f0.js",
+    "static/js/2.f34e8d60.chunk.js",
+    "static/css/main.b4965327.chunk.css",
+    "static/js/main.50ec1519.chunk.js"
   ]
 }

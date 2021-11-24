@@ -4,7 +4,7 @@ export interface ITreeDrawerProps {};
 const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
     return (
         <div>
-            <canvas ></canvas>
+            <canvas></canvas>
         </div>
     );
 }

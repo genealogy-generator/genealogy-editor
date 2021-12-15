@@ -40,7 +40,7 @@ class TimelineDate {
     this.startTimelineYear = year;
   }
 
-  // изменяет дату(усли пользователь изменил дату)
+  // изменяет дату(если пользователь изменил дату)
   changeDate(day: number, month: number, year: number) {
     this.day = day;
     this.month = month;

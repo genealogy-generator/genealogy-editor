@@ -1,5 +1,5 @@
-import { daysInYear } from "./constant";
-import { daysInMonth } from "./constant";
+import { daysInYear } from "../constant";
+import { daysInMonth } from "../constant";
 
 class TimelineDate {
   day;

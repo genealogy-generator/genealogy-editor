@@ -1,11 +1,13 @@
 import React from "react";
-export interface ITreeEditorProps {};
+import TreeDrawer from "../TreeDrawer/TreeDrawer";
+export interface ITreeEditorProps {
+    width?:number;
+    height?:number;
+};
 
 const TreeEditor: React.FC<ITreeEditorProps> = (props) => {
     return (
-        <div>
-            
-        </div>
+        <div><TreeDrawer {...props}></TreeDrawer></div>
     );
 }
 

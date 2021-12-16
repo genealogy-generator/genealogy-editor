@@ -3,9 +3,7 @@ export interface ITreeEditorProps {};
 
 const TreeEditor: React.FC<ITreeEditorProps> = (props) => {
     return (
-        <div>
-            
-        </div>
+        <div></div>
     );
 }
 

@@ -1,5 +1,6 @@
 import { AnyAction } from "@reduxjs/toolkit";
-import { ITreeLink, ITreeNode } from "../../types/treeTypes";
+import { ITreeLinkRelation } from "../../types/interfaces/ITreeLinkRelation";
+import { ITreeNode } from "../../types/interfaces/ITreeNode";
 
 export enum TreeActionTypes {
     CREATE_NODE,
@@ -10,7 +11,7 @@ export enum TreeActionTypes {
 
 export interface ITreeRemoveLinkAction extends AnyAction{
     type: TreeActionTypes.REMOVE_LINK;
-    payload?: ITreeLink;
+    payload?: any;
 }
 export interface ITreeRemoveNodeAction extends AnyAction{
     type: TreeActionTypes.REMOVE_NODE;
@@ -18,11 +19,11 @@ export interface ITreeRemoveNodeAction extends AnyAction{
 }
 export interface ITreeCreateLinkAction extends AnyAction{
     type: TreeActionTypes.CREATE_LINK;
-    payload?: ITreeLink;
+    payload?: any;
 }
 export interface ITreeCreateNodeAction extends AnyAction{
     type: TreeActionTypes.CREATE_NODE;
-    payload?: ITreeNode;
+    payload?: ITreeLinkRelation;
 }
 
 export type ITreeAction = ITreeRemoveLinkAction | ITreeRemoveNodeAction | ITreeCreateLinkAction | ITreeCreateNodeAction

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TimelineDate from "../../types/TimelineDate";
-import "./characteristics.css";
+import "./Characteristics.css";
 
 function Characteristics() {
   //временно. Начальная инициализация при загрузке страницы

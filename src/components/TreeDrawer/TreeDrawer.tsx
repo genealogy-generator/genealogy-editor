@@ -1,67 +1,105 @@
-import React, { useEffect, useRef } from "react";
-import { Layer, Stage } from "react-konva";
+import React, {useEffect, useRef, useState} from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { ITreeAction, TreeActionTypes } from "../../storage/actions/treeAction";
-import { Point } from "../../types/coords";
-import { ITreeNode } from "../../types/interfaces/ITreeNode";
+import TimelineDate from "../../types/TimelineDate";
+
+// @ts-ignore
+import Graph from "react-graph-vis"
+
+
 export interface ITreeDrawerProps {
     width?:number;
     height?:number;
 };
 
-const dateToYcord = (date:number,start:number,scale:number) =>{
-    return (date - start) * scale;
-}
-
-
-const drawLine = (from:Point | null,to:Point | null,type:string,ctx: CanvasRenderingContext2D) => {
-    if (! to || !from) return;
-    ctx.beginPath()
-    ctx.moveTo(...from);
-    ctx.lineWidth = 3;
-    ctx.lineTo(...to);
-    ctx.strokeStyle = '#ffffff'
-    ctx.stroke()
-    console.log(from,to);
-    
-}
 
 
 const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
-    const node    = useTypedSelector(state => state.tree?.node);
+    const nodes   = useTypedSelector(state => state.tree?.nodes); //graph
+    const edges   = useTypedSelector(state => state.tree?.edges);
+
+    /*const graphDefault: {nodes: Array<any>, edges: Array<any>} = {
+        nodes: [
+
+        ],
+        edges: [
+
+        ]
+    };
+    const [graph, setGraph] = useState({...graphDefault});
+*/
+
     const dispach = useDispatch();
-    
-    const act : ITreeAction[] = []
-    const canvasRef = useRef(null);
-    useEffect(()=>{
-        const canvas : HTMLCanvasElement = canvasRef.current!;
-        const ctx    = canvas.getContext('2d')!;
-        
-        //clear backgraund
-        ctx.fillStyle = "#1e1e1e"
-        ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height)
-        
-        if (!node) return;
 
-        const drawNode = (node: ITreeNode, x: number, ctx: CanvasRenderingContext2D) => {
-            ctx.fillStyle = "#0f0"
-            if(node.type != "root") ctx.fillRect(x,node.birth_date - 6,12,12);
-            node.relations.forEach((value)=>drawNode(value.object,x,ctx));
-            
+    const rendNodes: Array<any> = []
+    const rendEdges: Array<any> = []
+    let a;
+    if (!nodes || !edges)
+        return <h1>
+            НАСРАНО
+        </h1>
+
+        nodes.forEach((value, key) => {
+
+            rendNodes.push({
+                id: key,
+                label: value.name + " " + value.surname,
+                title: value.name + " " + value.surname + " text"
+            });
+            console.log("rendNodes");
+            console.log(rendNodes);
+        });
+        edges.forEach((value, key) => {
+            rendEdges.push({from: key, to: value/*, id: key.toString()+value.toString()*/});
+            console.log("rendEdges");
+            console.log(rendEdges);
+        });
+        console.log("rendNodes bef");
+        console.log(rendNodes);
+        console.log("rendEdges bef");
+        console.log(rendEdges);
+
+        // ERROR
+        //setGraph({nodes: [...rendNodes], edges: [...rendEdges]});
+        const graphDefault: {nodes: Array<any>, edges: Array<any>} = {
+            nodes: rendNodes,
+            edges: rendEdges
+        };
+
+    const events = {
+        select: function(event: any) {
+            var { nodes, edges } = event;
         }
-        
-        drawNode(node,10,ctx);
+    };
 
-    },[node])
+    const options = {
+        layout: {
+            hierarchical: true
+        },
+        edges: {
+            color: "#000000"
+        },
+        height: "500px"
+    };
+
     return (
         <div>
-            <canvas ref={canvasRef} width={props.width} height={props.height} />
+            <h2>
+                {JSON.stringify(graphDefault)}
+                </h2>
+            <Graph
+                graph={graphDefault}
+                options={options}
+                events={events}
+                getNetwork={() => {}}
+            />
+
             <button onClick={()=>{
                 dispach({
                     type:TreeActionTypes.CREATE_NODE,payload:{
                         object:{
-                            birth_date:Math.round(Math.random()*Number(props.width)),
+                            birth: new TimelineDate(0,0,Math.round(Math.random()*Number(props.width)),0,0,0),
                             relations:[],
                             type:"character"
                         },

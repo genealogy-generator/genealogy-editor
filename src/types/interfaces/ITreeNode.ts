@@ -1,13 +1,4 @@
-import { ITreeLinkRelation } from "./ITreeLinkRelation";
+import ITreeNodeRoot from "./ITreeNodeRoot";
+import ITreeNodeCharacter from "./ITreeNodeCharacter";
 
-export interface ITreeNodeRoot {
-    relations:ITreeLinkRelation[];
-    type: "root";
-}
-export interface ITreeNodeCharacter{
-    birth_date: number;
-    relations:ITreeLinkRelation[];
-    type: "character";
-}
-
-export type ITreeNode = ITreeNodeRoot | ITreeNodeCharacter;
+export type ITreeNode = ITreeNodeCharacter;

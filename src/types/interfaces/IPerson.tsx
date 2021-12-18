@@ -4,7 +4,7 @@ interface IPerson {
 name : string;
 surname : string;
 patronymic : string;
-birth: TimelineDate | null;
+birth: TimelineDate;
 death: TimelineDate | null;
 }
 

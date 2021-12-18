@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import TimelineDate from "./timelineDate";
+import TimelineDate from "../../types/TimelineDate";
 import "./characteristics.css";
 
 function Characteristics() {
+  //временно. Начальная инициализация при загрузке страницы
   let br = new TimelineDate(0, 0, 0, 0, 0, 0);
 
   const [isEditing, setisEditing] = useState(1);
@@ -17,7 +18,11 @@ function Characteristics() {
     if (isEditing) {
       setisEditing(0);
       setText("Edit");
-      //setname()
+      //setname();
+      //setsurname();
+      //setpatromymic();
+      //setbirth();
+      //setdeath();
     } else {
       setisEditing(1);
       setText("Save");

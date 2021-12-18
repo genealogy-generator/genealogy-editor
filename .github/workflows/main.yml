@@ -3,8 +3,6 @@ name: CI/CD
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build:
@@ -33,7 +31,10 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-
+      
+    - name: Ignore warrnings
+      run: unset CI 
+      
     - name: Build
       run: npm run build
 

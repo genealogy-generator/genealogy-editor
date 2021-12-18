@@ -40,11 +40,26 @@ class TimelineDate {
     this.startTimelineYear = year;
   }
 
-  // изменяет дату(усли пользователь изменил дату)
+  // изменяет дату(если пользователь изменил дату)
   changeDate(day: number, month: number, year: number) {
     this.day = day;
     this.month = month;
     this.year = year;
+  }
+
+  //изменяет дату, на вход подаётся строка day.month.year
+  changeDateString(str: string) {
+    let arr = str.split(".");
+    if (arr.length == 1) {
+      this.day = Number(arr[0]);
+    } else if (arr.length == 2) {
+      this.day = Number(arr[0]);
+      this.month = Number(arr[1]);
+    } else {
+      this.day = Number(arr[0]);
+      this.month = Number(arr[1]);
+      this.year = Number(arr[2]);
+    }
   }
 }
 

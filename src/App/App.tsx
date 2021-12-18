@@ -7,7 +7,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Лишнее удалено</h1>
-        //тест
         <Characteristics/>
       </header>
     </div>

@@ -1,15 +1,13 @@
 import React, { useEffect, useRef } from "react";
-import { Layer, Stage } from "react-konva";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { ITreeAction, TreeActionTypes } from "../../storage/actions/treeAction";
-import { Point } from "../../types/coords";
+import { TreeActionTypes } from "../../storage/actions/treeAction";
 import { ITreeNode } from "../../types/interfaces/ITreeNode";
 export interface ITreeDrawerProps {
     width?:number;
     height?:number;
 };
-
+/*
 const dateToYcord = (date:number,start:number,scale:number) =>{
     return (date - start) * scale;
 }
@@ -26,13 +24,13 @@ const drawLine = (from:Point | null,to:Point | null,type:string,ctx: CanvasRende
     console.log(from,to);
     
 }
-
+*/
 
 const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
     const node    = useTypedSelector(state => state.tree?.node);
     const dispach = useDispatch();
     
-    const act : ITreeAction[] = []
+    //const act : ITreeAction[] = []
     const canvasRef = useRef(null);
     useEffect(()=>{
         const canvas : HTMLCanvasElement = canvasRef.current!;
@@ -46,7 +44,7 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
 
         const drawNode = (node: ITreeNode, x: number, ctx: CanvasRenderingContext2D) => {
             ctx.fillStyle = "#0f0"
-            if(node.type != "root") ctx.fillRect(x,node.birth_date - 6,12,12);
+            if(node.type !== "root") ctx.fillRect(x,node.birth_date - 6,12,12);
             node.relations.forEach((value)=>drawNode(value.object,x,ctx));
             
         }

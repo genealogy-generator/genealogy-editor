@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import TimelineDate from "../../types/TimelineDate";
-import IPerson from "../../types/interfaces/IPerson";
 import "./Characteristics.css";
 
 function Characteristics() {
@@ -10,10 +9,12 @@ function Characteristics() {
   const [name, setname] = useState("name");
   const [surname, setsurname] = useState("surname");
   const [patronymic, setpatronymic] = useState("patronymic");
-  const [birth, setbirth] = useState<TimelineDate>(
+  //setbirth
+  const [birth] = useState<TimelineDate>(
     new TimelineDate(0, 0, 0, 0, 0, 0)
   );
-  const [death, setdeath] = useState<TimelineDate | null>(
+  //setdeath
+  const [death] = useState<TimelineDate | null>(
     new TimelineDate(0, 0, 0, 0, 0, 0)
   );
 

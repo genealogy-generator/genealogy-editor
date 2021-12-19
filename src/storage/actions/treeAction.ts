@@ -1,6 +1,5 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import { ITreeLinkRelation } from "../../types/interfaces/ITreeLinkRelation";
-import { ITreeNode } from "../../types/interfaces/ITreeNode";
 
 export enum TreeActionTypes {
     CREATE_NODE,

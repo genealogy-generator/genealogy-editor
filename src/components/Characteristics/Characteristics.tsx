@@ -3,26 +3,25 @@ import TimelineDate from "../../types/TimelineDate";
 import "./Characteristics.css";
 
 function Characteristics() {
-  //временно. Начальная инициализация при загрузке страницы
-  let br = new TimelineDate(0, 0, 0, 0, 0, 0);
-
+  // начальную инициализацию нужно изменить при загрузке персонажа
   const [isEditing, setisEditing] = useState(1);
   const [Text, setText] = useState("Save");
-  const [name, setname] = useState("Name");
-  const [surname, setsurname] = useState("Surname");
-  const [patronymic, setpatronymic] = useState("Patronymic");
-  const [birth, setbirth] = useState(br);
-  const [death, setdeath] = useState<TimelineDate | null>(null);
+  const [name, setname] = useState("name");
+  const [surname, setsurname] = useState("surname");
+  const [patronymic, setpatronymic] = useState("patronymic");
+  //setbirth
+  const [birth] = useState<TimelineDate>(
+    new TimelineDate(0, 0, 0, 0, 0, 0)
+  );
+  //setdeath
+  const [death] = useState<TimelineDate | null>(
+    new TimelineDate(0, 0, 0, 0, 0, 0)
+  );
 
   function handleClick() {
     if (isEditing) {
       setisEditing(0);
       setText("Edit");
-      //setname();
-      //setsurname();
-      //setpatromymic();
-      //setbirth();
-      //setdeath();
     } else {
       setisEditing(1);
       setText("Save");
@@ -37,7 +36,12 @@ function Characteristics() {
       <div className="divCharacteristics">
         <h4>Name: </h4>
         {isEditing ? (
-          <input defaultValue={name} id="characteristicsName"></input>
+          <input
+            defaultValue={name}
+            onChange={(e) => {
+              setname(e.target.value);
+            }}
+          ></input>
         ) : (
           <h4>{name}</h4>
         )}
@@ -45,7 +49,12 @@ function Characteristics() {
       <div className="divCharacteristics">
         <h4>Surname: </h4>
         {isEditing ? (
-          <input defaultValue={surname} id="characteristicsSurname"></input>
+          <input
+            defaultValue={surname}
+            onChange={(e) => {
+              setsurname(e.target.value);
+            }}
+          ></input>
         ) : (
           <h4>{surname}</h4>
         )}
@@ -55,7 +64,9 @@ function Characteristics() {
         {isEditing ? (
           <input
             defaultValue={patronymic}
-            id="characteristicsPatronymic"
+            onChange={(e) => {
+              setpatronymic(e.target.value);
+            }}
           ></input>
         ) : (
           <h4>{patronymic}</h4>
@@ -72,7 +83,7 @@ function Characteristics() {
               "." +
               String(birth.year)
             }
-            id="characteristicsDateBirth"
+            onChange={(e) => {}}
           ></input>
         ) : (
           <h4>
@@ -97,7 +108,11 @@ function Characteristics() {
                   String(death.year)
                 : "present time"
             }
-            id="characteristicsDateDeath"
+            onChange={(e) => {
+              if (e.target.value.length > 0) {
+              } else {
+              }
+            }}
           ></input>
         ) : (
           <h4>

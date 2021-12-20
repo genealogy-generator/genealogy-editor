@@ -40,31 +40,11 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
             НАСРАНО
         </h1>
 
-        nodes.forEach((value, key) => {
-
-            rendNodes.push({
-                id: key,
-                label: value.name + " " + value.surname,
-                title: value.name + " " + value.surname + " text"
-            });
-            console.log("rendNodes");
-            console.log(rendNodes);
-        });
-        edges.forEach((value, key) => {
-            rendEdges.push({from: key, to: value/*, id: key.toString()+value.toString()*/});
-            console.log("rendEdges");
-            console.log(rendEdges);
-        });
-        console.log("rendNodes bef");
-        console.log(rendNodes);
-        console.log("rendEdges bef");
-        console.log(rendEdges);
-
         // ERROR
         //setGraph({nodes: [...rendNodes], edges: [...rendEdges]});
         const graphDefault: {nodes: Array<any>, edges: Array<any>} = {
-            nodes: rendNodes,
-            edges: rendEdges
+            nodes: nodes,
+            edges: edges
         };
 
     const events = {

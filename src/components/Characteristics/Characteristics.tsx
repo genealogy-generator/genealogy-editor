@@ -9,12 +9,10 @@ function Characteristics() {
   const [name, setname] = useState("name");
   const [surname, setsurname] = useState("surname");
   const [patronymic, setpatronymic] = useState("patronymic");
-  //setbirth
-  const [birth] = useState<TimelineDate>(
+  const [birth, setbirth] = useState<TimelineDate>(
     new TimelineDate(0, 0, 0, 0, 0, 0)
   );
-  //setdeath
-  const [death] = useState<TimelineDate | null>(
+  const [death, setdeath] = useState<TimelineDate | null>(
     new TimelineDate(0, 0, 0, 0, 0, 0)
   );
 
@@ -83,7 +81,12 @@ function Characteristics() {
               "." +
               String(birth.year)
             }
-            onChange={(e) => {}}
+            onChange={(e) => {
+              let obj = new TimelineDate(0, 0, 0, 0, 0, 0);
+              Object.assign(obj, birth);
+              obj.changeDateString(e.target.value);
+              setbirth(obj);
+            }}
           ></input>
         ) : (
           <h4>
@@ -106,11 +109,18 @@ function Characteristics() {
                   String(death.month) +
                   "." +
                   String(death.year)
-                : "present time"
+                : "not dead yet"
             }
             onChange={(e) => {
               if (e.target.value.length > 0) {
+                let obj = new TimelineDate(0, 0, 0, 0, 0, 0);
+                if (typeof death == "object") {
+                  Object.assign(obj, death);
+                }
+                obj.changeDateString(e.target.value);
+                setdeath(obj);
               } else {
+                setdeath(null);
               }
             }}
           ></input>
@@ -122,7 +132,7 @@ function Characteristics() {
                 String(death.month) +
                 "." +
                 String(death.year)
-              : "present time"}
+              : "not dead yet"}
           </h4>
         )}
       </div>

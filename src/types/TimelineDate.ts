@@ -61,6 +61,10 @@ class TimelineDate {
       this.year = Number(arr[2]);
     }
   }
+  // возващает дату как строку
+  returnDateAsString(): string {
+    return String(this.day) + "." + String(this.month) + "." + String(this.year);
+  }
 }
 
 export default TimelineDate;

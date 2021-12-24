@@ -63,7 +63,7 @@ class TimelineDate {
   }
   // возващает дату как строку
   returnDateAsString(): string {
-    return String(this.day) + "." + String(this.month) + "." + String(this.year);
+    return `${this.day}.${this.month}.${this.year}`;
   }
 }
 

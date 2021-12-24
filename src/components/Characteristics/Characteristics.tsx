@@ -1,27 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import TimelineDate from "../../types/TimelineDate";
 import "./Characteristics.css";
+import IPerson from "../../types/interfaces/IPerson";
+
+// нужно переместить
+export type OnChangeFunction = (e: React.ChangeEvent<HTMLInputElement>) => void;
 
 function Characteristics() {
   // начальную инициализацию нужно изменить при загрузке персонажа
-  const [isEditing, setisEditing] = useState(1);
-  const [Text, setText] = useState("Save");
-  const [name, setname] = useState("name");
-  const [surname, setsurname] = useState("surname");
-  const [patronymic, setpatronymic] = useState("patronymic");
-  const [birth, setbirth] = useState<TimelineDate>(
-    new TimelineDate(0, 0, 0, 0, 0, 0)
-  );
-  const [death, setdeath] = useState<TimelineDate | null>(
-    new TimelineDate(0, 0, 0, 0, 0, 0)
-  );
+  const [isEditing, setisEditing] = useState(false);
+  const [Text, setText] = useState("Edit");
+
+  const [person, setPerson] = useState<IPerson>({
+    name: "name",
+    surname: "surname",
+    patronymic: "patronymic",
+    birth: new TimelineDate(0, 0, 0, 0, 0, 0),
+    death: new TimelineDate(0, 0, 0, 0, 0, 0),
+  });
 
   function handleClick() {
     if (isEditing) {
-      setisEditing(0);
+      setisEditing(false);
       setText("Edit");
     } else {
-      setisEditing(1);
+      setisEditing(true);
       setText("Save");
     }
   }
@@ -31,111 +34,99 @@ function Characteristics() {
       <button onClick={handleClick} style={{ width: "100%", height: "2rem" }}>
         {Text}
       </button>
-      <div className="divCharacteristics">
-        <h4>Name: </h4>
-        {isEditing ? (
-          <input
-            defaultValue={name}
-            onChange={(e) => {
-              setname(e.target.value);
-            }}
-          ></input>
-        ) : (
-          <h4>{name}</h4>
-        )}
-      </div>
-      <div className="divCharacteristics">
-        <h4>Surname: </h4>
-        {isEditing ? (
-          <input
-            defaultValue={surname}
-            onChange={(e) => {
-              setsurname(e.target.value);
-            }}
-          ></input>
-        ) : (
-          <h4>{surname}</h4>
-        )}
-      </div>
-      <div className="divCharacteristics">
-        <h4>Patronymic: </h4>
-        {isEditing ? (
-          <input
-            defaultValue={patronymic}
-            onChange={(e) => {
-              setpatronymic(e.target.value);
-            }}
-          ></input>
-        ) : (
-          <h4>{patronymic}</h4>
-        )}
-      </div>
-      <div className="divCharacteristics">
-        <h4>Date of birth: </h4>
-        {isEditing ? (
-          <input
-            defaultValue={
-              String(birth.day) +
-              "." +
-              String(birth.month) +
-              "." +
-              String(birth.year)
+      <FieldCharacteristic
+        fieldName={"Name: "}
+        isEditing={isEditing}
+        handleChange={(e) => {
+          setPerson({ ...person, name: e.target.value });
+        }}
+        showString={person.name}
+      />
+      <FieldCharacteristic
+        fieldName={"Surname: "}
+        isEditing={isEditing}
+        handleChange={(e) => {
+          setPerson({ ...person, surname: e.target.value });
+        }}
+        showString={person.surname}
+      />
+      <FieldCharacteristic
+        fieldName={"Patronymic: "}
+        isEditing={isEditing}
+        handleChange={(e) => {
+          setPerson({ ...person, patronymic: e.target.value });
+        }}
+        showString={person.patronymic}
+      />
+      <FieldCharacteristic
+        fieldName={"Birth Date: "}
+        isEditing={isEditing}
+        handleChange={(e) => {
+          let obj = new TimelineDate(0, 0, 0, 0, 0, 0);
+          Object.assign(obj, person.birth);
+          obj.changeDateString(e.target.value);
+          setPerson({ ...person, birth: obj });
+        }}
+        showString={person.birth.returnDateAsString()}
+      />
+      <FieldCharacteristic
+        fieldName={"Death Date: "}
+        isEditing={isEditing}
+        handleChange={(e) => {
+          if (e.target.value.length > 0) {
+            let obj = new TimelineDate(0, 0, 0, 0, 0, 0);
+            if (typeof person.death == "object") {
+              Object.assign(obj, person.death);
             }
-            onChange={(e) => {
-              let obj = new TimelineDate(0, 0, 0, 0, 0, 0);
-              Object.assign(obj, birth);
-              obj.changeDateString(e.target.value);
-              setbirth(obj);
-            }}
-          ></input>
-        ) : (
-          <h4>
-            {String(birth.day) +
-              "." +
-              String(birth.month) +
-              "." +
-              String(birth.year)}
-          </h4>
-        )}
-      </div>
-      <div className="divCharacteristics">
-        <h4>Date of death: </h4>
-        {isEditing ? (
-          <input
-            defaultValue={
-              death
-                ? String(death.day) +
-                  "." +
-                  String(death.month) +
-                  "." +
-                  String(death.year)
-                : "not dead yet"
-            }
-            onChange={(e) => {
-              if (e.target.value.length > 0) {
-                let obj = new TimelineDate(0, 0, 0, 0, 0, 0);
-                if (typeof death == "object") {
-                  Object.assign(obj, death);
-                }
-                obj.changeDateString(e.target.value);
-                setdeath(obj);
-              } else {
-                setdeath(null);
-              }
-            }}
-          ></input>
-        ) : (
-          <h4>
-            {death
-              ? String(death.day) +
-                "." +
-                String(death.month) +
-                "." +
-                String(death.year)
-              : "not dead yet"}
-          </h4>
-        )}
-      </div>
+            obj.changeDateString(e.target.value);
+            setPerson({ ...person, death: obj });
+          } else {
+            setPerson({ ...person, death: null });
+          }
+        }}
+        showString={
+          person.death ? person.death.returnDateAsString() : "not dead yet"
+        }
+      />
+    </div>
+  );
+}
+
+// возвращает строку, почти бесполезно
+function ShowString(props: { string: string }) {
+  return <h4>{props.string}</h4>;
+}
+
+// возвращает элемент input, на вход подаются дефолтное значение и функция обработки изменения значения поля ввода
+function ReturnInput(props: {
+  defaultVal: string;
+  handleChange: OnChangeFunction;
+}) {
+  return (
+    <input
+      defaultValue={props.defaultVal}
+      onChange={props.handleChange}
+    ></input>
+  );
+}
+// Компонент, который может быть полем ввода или заголовком в зависимости от isEditing
+function FieldCharacteristic(props: {
+  fieldName: string; //Название поля
+  isEditing: boolean;
+  handleChange: OnChangeFunction; // Функция обработки изменения поля
+  showString: string; // Значение поля
+}) {
+  return (
+    <div className="divCharacteristics">
+      <ShowString string={props.fieldName} />
+      {props.isEditing ? (
+        <ReturnInput
+          defaultVal={props.showString}
+          handleChange={props.handleChange}
+        />
+      ) : (
+        <ShowString string={props.showString} />
+      )}
     </div>
   );
 }

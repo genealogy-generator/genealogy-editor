@@ -2,9 +2,7 @@ import React, { useState, useReducer } from "react";
 import TimelineDate from "../../types/TimelineDate";
 import "./Characteristics.css";
 import IPerson from "../../types/interfaces/IPerson";
-
-// нужно переместить
-export type OnChangeFunction = (e: React.ChangeEvent<HTMLInputElement>) => void;
+import FieldCharacteristic from "../ui/FieldCharacteristic/FieldCharacteristic";
 
 function Characteristics() {
   // начальную инициализацию нужно изменить при загрузке персонажа
@@ -88,45 +86,6 @@ function Characteristics() {
           person.death ? person.death.returnDateAsString() : "not dead yet"
         }
       />
-    </div>
-  );
-}
-
-// возвращает строку, почти бесполезно
-function ShowString(props: { string: string }) {
-  return <h4>{props.string}</h4>;
-}
-
-// возвращает элемент input, на вход подаются дефолтное значение и функция обработки изменения значения поля ввода
-function ReturnInput(props: {
-  defaultVal: string;
-  handleChange: OnChangeFunction;
-}) {
-  return (
-    <input
-      defaultValue={props.defaultVal}
-      onChange={props.handleChange}
-    ></input>
-  );
-}
-// Компонент, который может быть полем ввода или заголовком в зависимости от isEditing
-function FieldCharacteristic(props: {
-  fieldName: string; //Название поля
-  isEditing: boolean;
-  handleChange: OnChangeFunction; // Функция обработки изменения поля
-  showString: string; // Значение поля
-}) {
-  return (
-    <div className="divCharacteristics">
-      <ShowString string={props.fieldName} />
-      {props.isEditing ? (
-        <ReturnInput
-          defaultVal={props.showString}
-          handleChange={props.handleChange}
-        />
-      ) : (
-        <ShowString string={props.showString} />
-      )}
     </div>
   );
 }

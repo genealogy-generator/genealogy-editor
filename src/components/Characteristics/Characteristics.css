@@ -1,15 +1,16 @@
 h4 {
   width: 12rem;
   height: 2rem;
-  align-items: center;
+  align-items: left;
 }
 
 input {
+  margin-top: 1rem;
   width: 15rem;
   height: 2rem;
 }
 
 .divCharacteristics {
   display: flex;
-  align-items: center;
+  align-items: left;
 }

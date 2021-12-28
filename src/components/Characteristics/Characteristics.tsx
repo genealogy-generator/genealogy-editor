@@ -1,16 +1,13 @@
-import React, { useState, useReducer } from "react";
+import React, { useState } from "react";
 import TimelineDate from "../../types/TimelineDate";
 import "./Characteristics.css";
 import IPerson from "../../types/interfaces/IPerson";
 
-// нужно переместить
+/* нужно переместить*/
 export type OnChangeFunction = (e: React.ChangeEvent<HTMLInputElement>) => void;
 
-function Characteristics() {
-  // начальную инициализацию нужно изменить при загрузке персонажа
-  const [isEditing, setisEditing] = useState(false);
-  const [Text, setText] = useState("Edit");
-
+function Characteristics(props: { isEditing: boolean }) {
+  /* начальную инициализацию нужно изменить при загрузке персонажа*/
   const [person, setPerson] = useState<IPerson>({
     name: "name",
     surname: "surname",
@@ -19,21 +16,10 @@ function Characteristics() {
     death: new TimelineDate(0, 0, 0, 0, 0, 0),
   });
 
-  function handleClick() {
-    if (isEditing) {
-      setisEditing(false);
-      setText("Edit");
-    } else {
-      setisEditing(true);
-      setText("Save");
-    }
-  }
+  let isEditing = props.isEditing;
 
   return (
     <div style={{ display: "grid" }}>
-      <button onClick={handleClick} style={{ width: "100%", height: "2rem" }}>
-        {Text}
-      </button>
       <FieldCharacteristic
         fieldName={"Name: "}
         isEditing={isEditing}
@@ -92,12 +78,14 @@ function Characteristics() {
   );
 }
 
-// возвращает строку, почти бесполезно
+export default Characteristics;
+
+/* возвращает строку*/
 function ShowString(props: { string: string }) {
   return <h4>{props.string}</h4>;
 }
 
-// возвращает элемент input, на вход подаются дефолтное значение и функция обработки изменения значения поля ввода
+/* возвращает элемент input, на вход подаются дефолтное значение и функция обработки изменения значения поля ввода*/
 function ReturnInput(props: {
   defaultVal: string;
   handleChange: OnChangeFunction;
@@ -109,7 +97,7 @@ function ReturnInput(props: {
     ></input>
   );
 }
-// Компонент, который может быть полем ввода или заголовком в зависимости от isEditing
+/* Компонент, который может быть полем ввода или заголовком в зависимости от isEditing*/
 function FieldCharacteristic(props: {
   fieldName: string; //Название поля
   isEditing: boolean;
@@ -130,5 +118,3 @@ function FieldCharacteristic(props: {
     </div>
   );
 }
-
-export default Characteristics;

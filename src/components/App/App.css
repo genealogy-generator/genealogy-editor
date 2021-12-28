@@ -3,7 +3,7 @@
   display: flex;
   width: 100vw;
   justify-items: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .App-logo {

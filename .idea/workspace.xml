@@ -25,21 +25,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13f6c73b-0400-42a4-9a02-d0103b0797e7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/genealogy-editor.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/types/interfaces/ITreeNodeCharacter.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/types/interfaces/ITreeNodeRoot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TreeDrawer/TreeDrawer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TreeDrawer/TreeDrawer.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TreeDrawer/TreeDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TreeDrawer/TreeDrawer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/storage/reducers/treeReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/reducers/treeReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/interfaces/IPerson.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/interfaces/IPerson.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/interfaces/ITreeNode.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/interfaces/ITreeNode.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +49,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../react-js-test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -80,7 +68,11 @@
       <updated>1639833647688</updated>
       <workItem from="1639833650951" duration="1011000" />
       <workItem from="1639835349512" duration="272000" />
-      <workItem from="1639835652340" duration="11843000" />
+      <workItem from="1639835652340" duration="12444000" />
+      <workItem from="1640014069983" duration="1748000" />
+      <workItem from="1640610679474" duration="4250000" />
+      <workItem from="1640799540778" duration="243000" />
+      <workItem from="1640872401584" duration="2814000" />
     </task>
     <servers />
   </component>
@@ -97,11 +89,27 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1639841251715">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1640611062233">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1639841251715" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1640611062233" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1640612104825">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1640612104825" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/App/App.tsx</url>
+          <line>12</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

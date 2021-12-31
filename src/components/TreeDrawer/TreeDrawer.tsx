@@ -1,8 +1,9 @@
 import React, {useEffect, useRef, useState} from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { ITreeAction, TreeActionTypes } from "../../storage/actions/treeAction";
+import {TreeActionTypes } from "../../storage/actions/treeAction";
 import TimelineDate from "../../types/TimelineDate";
+import backgndImage from "../../media/backgnd.jpg";
 
 // @ts-ignore
 import Graph from "react-graph-vis"
@@ -55,20 +56,29 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
         edges: {
             color: "#000000"
         },
-        height: "500px"
+        height: "600px",
+        width: "80%",
+        nodes: {
+            image: "../../media/cat.jpg",
+            /*color: {
+                background: '#00FF00'
+            },*/
+        }
+
+        //backgroundImage: `url(${backgndImage})` "../../media/backgnd.jpg"
     };
 
     return (
-        <div>
-            <h2>
-                {JSON.stringify(graph)}
-                </h2>
+        <div id="TreeDrawer">
+            {/*<img src={backgndImage} alt={"background"}/>*/}
             <Graph
                 key = {graphKey}
                 graph={graph}
                 options={options}
                 events={events}
                 getNetwork={() => {}}
+                style={{backgroundImage: `url(${backgndImage})`,
+                    backgroundSize: "cover",height: "100%",width: "100%"}}
             />
 
             <button onClick={()=>{

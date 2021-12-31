@@ -1,5 +1,10 @@
 .TreeDrawer {
     hierarchical: true;
-    color: #000000;
+    color: #000FF0;
     height: 500px;
+    background-color: #61dafb;
+}
+
+#gr {
+    background-color: #61dafb;
 }

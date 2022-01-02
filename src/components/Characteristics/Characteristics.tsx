@@ -1,10 +1,9 @@
-import React, { useState, useReducer } from "react";
+import { useState } from "react";
 import TimelineDate from "../../types/TimelineDate";
 import "./Characteristics.css";
 import IPerson from "../../types/interfaces/IPerson";
 import FieldCharacteristic from "../ui/FieldCharacteristic/FieldCharacteristic";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import Id from "../../types/Id";
 import { useTypedDispatch } from "../../hooks/useTypedDispatch";
 
 function Characteristics() {
@@ -14,6 +13,8 @@ function Characteristics() {
 
   const [isEditing, setisEditing] = useState(false);
   const [Text, setText] = useState("Edit");
+  //Move id to redux storage
+  // eslint-disable-next-line
   const [charId, setCharId] = useState<number>(0);
   const [person, _setPerson] = useState<IPerson>();
   const setPerson = (person: IPerson) => {
@@ -29,7 +30,7 @@ function Characteristics() {
           dispatch({type:"GenearateDynasty"})
         }}>GENERATE DYNASTY</button>
     </div>)
-  if(person != character) setPerson(character);
+  if(person !== character) setPerson(character);
 
   if (!person) return (<h2>PERSON IS NULL</h2>)
   function handleClick() {

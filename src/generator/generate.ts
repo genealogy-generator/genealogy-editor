@@ -21,19 +21,19 @@ class CharactersArray{
         return [...this.main.values(),...this.secondary.values()]
     }
     add(character: IPerson){
-        if(character.id.dynastyid == this.dynastyid) this.memberCount++;
+        if(character.id.dynastyid === this.dynastyid) this.memberCount++;
         this.update(character)
     }
     update(character: IPerson){
-        if(character.id.dynastyid == this.dynastyid) return this.main.set(character.id,character)
+        if(character.id.dynastyid === this.dynastyid) return this.main.set(character.id,character)
         return this.secondary.set(character.id,character)
     }
     find(id:Id){
-        if(id.dynastyid == this.dynastyid) return this.main.get(id)
+        if(id.dynastyid === this.dynastyid) return this.main.get(id)
         return this.secondary.get(id)
     }
     delete(id:Id){
-        if(id.dynastyid == this.dynastyid) return this.main.delete(id)
+        if(id.dynastyid === this.dynastyid) return this.main.delete(id)
         return this.secondary.delete(id)
     }
     clear(){
@@ -100,8 +100,11 @@ class Generator implements IGenData{
             
             this._pseudorandom = function() {
                 var t = seed += 0x6D2B79F5;
+                // eslint-disable-next-line
                 t = Math.imul(t ^ t >>> 15, t | 1);
+                // eslint-disable-next-line
                 t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+                // eslint-disable-next-line
                 const ret = ((t ^ t >>> 14) >>> 0) / 4294967296;
                 this.options.DEBUG >= 3 && console.log(ret);
                 return ret;
@@ -112,7 +115,7 @@ class Generator implements IGenData{
         Object.assign(this,nameTemplate);
     }
     private IPersonFactory(name:string, surname:string, patronymic:string, birth:TimelineDate, death:null | TimelineDate, _awaitedCildCount: number,isMale:boolean = Boolean(this._randint() % 2)):IPerson{
-        const id = this.dynasty == surname?0:this.dynastys.findIndex(v=>v === surname)
+        const id = this.dynasty === surname?0:this.dynastys.findIndex(v=>v === surname)
         return {
             name,surname,patronymic,birth,death,
             _awaitedCildCount,isMale,
@@ -176,7 +179,7 @@ class Generator implements IGenData{
         return this.dynastys[idx]
     }
     private _findMerried(id:Id){
-        return this.links.find((value)=>(value.from.valueOf() == id.valueOf()  || value.to.valueOf() == id.valueOf()) && value.type == "merried")
+        return this.links.find((value)=>(value.from.valueOf() === id.valueOf()  || value.to.valueOf() === id.valueOf()) && value.type === "merried")
     }
     private _logChararacterData(character:IPerson,role:"founder" | "wifu" | "child",...args:IPerson[]){
         let prefix = "UNKNOWN"

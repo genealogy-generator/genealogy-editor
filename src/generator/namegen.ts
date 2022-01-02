@@ -199,7 +199,7 @@ namespace NameGen {
 		}
 
 		public split(): void {
-			if (this.set.length == 0) {
+			if (this.set.length === 0) {
 				this.set.push(new Sequence([]));
 			}
 			this.set.push(new Sequence([]));
@@ -210,8 +210,8 @@ namespace NameGen {
 		}
 
 		public add(a: NameGenerator | string): void {
-			if ((typeof a) === 'object') {
-				let g = <NameGenerator>a;
+			if (typeof a !== 'string') {
+				let g = a;
 				while (this.wrappers.length > 0) {
 					switch (this.wrappers.pop()) {
 						case Wrappers.reverser:
@@ -222,13 +222,13 @@ namespace NameGen {
 							break;
 					}
 				}
-				if (this.set.length == 0) {
+				if (this.set.length === 0) {
 					this.set.push(new Sequence([]));
 				}
 				this.set[this.set.length - 1].add(g);
 				return;
 			}
-			let chr = <string>a;
+			let chr = a;
 			let g = new Random([]);
 			g.add(new Literal(chr));
 			this.add(g);
@@ -265,8 +265,8 @@ namespace NameGen {
 		protected generators: NameGenerator[] = [];
 
 		constructor(pattern: string | NameGenerator[] | null = null, collapse_triples: boolean = true) {
-			if ((typeof pattern) === 'object') {
-				this.generators = <NameGenerator[]>pattern;
+			if (typeof pattern === "object" || pattern === null) {
+				this.generators = pattern?pattern:[];
 				return;
 			}
 
@@ -274,7 +274,7 @@ namespace NameGen {
 			let stack: Group[] = [];
 			let top: Group = new GroupSymbol();
 
-			let patternStr = <string>pattern;
+			let patternStr = pattern;
 
 			for (let i = 0; i < patternStr.length; i++) {
 				const chr = patternStr[i];
@@ -289,11 +289,11 @@ namespace NameGen {
 						break;
 					case '>':
 					case ')':
-						if (stack.length == 0) {
+						if (stack.length === 0) {
 							throw new Error('Unbalanced brackets');
-						} else if (chr === '>' && top.type != GroupTypes.symbol) {
+						} else if (chr === '>' && top.type !== GroupTypes.symbol) {
 							throw new Error('Unexpected \'>\' in pattern');
-						} else if (chr === ')' && top.type != GroupTypes.literal) {
+						} else if (chr === ')' && top.type !== GroupTypes.literal) {
 							throw new Error('Unexpected \')\' in pattern');
 						}
 						last = top.produce();
@@ -304,14 +304,14 @@ namespace NameGen {
 						top.split();
 						break;
 					case '!':
-						if (top.type == GroupTypes.symbol) {
+						if (top.type === GroupTypes.symbol) {
 							top.wrap(Wrappers.capitalizer);
 						} else {
 							top.add(chr);
 						}
 						break;
 					case '~':
-						if (top.type == GroupTypes.symbol) {
+						if (top.type === GroupTypes.symbol) {
 							top.wrap(Wrappers.reverser);
 						} else {
 							top.add(chr);
@@ -323,7 +323,7 @@ namespace NameGen {
 				}
 			}
 
-			if (stack.length != 0) {
+			if (stack.length !== 0) {
 				throw new Error('Missing closing brackets');
 			}
 
@@ -372,6 +372,7 @@ namespace NameGen {
 	}
 
 	class Random extends NameGenerator {
+		// eslint-disable-next-line
 		constructor(generators: NameGenerator[]) {
 			super(generators);
 		}
@@ -416,6 +417,7 @@ namespace NameGen {
 	}
 
 	class Sequence extends NameGenerator {
+		// eslint-disable-next-line
 		constructor(generators: NameGenerator[]) {
 			super(generators);
 		}

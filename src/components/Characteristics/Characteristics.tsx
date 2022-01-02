@@ -3,20 +3,35 @@ import TimelineDate from "../../types/TimelineDate";
 import "./Characteristics.css";
 import IPerson from "../../types/interfaces/IPerson";
 import FieldCharacteristic from "../ui/FieldCharacteristic/FieldCharacteristic";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import Id from "../../types/Id";
+import { useTypedDispatch } from "../../hooks/useTypedDispatch";
 
 function Characteristics() {
   // начальную инициализацию нужно изменить при загрузке персонажа
+  const characters = useTypedSelector(state => state.characters)
+  const dispatch = useTypedDispatch()
+
   const [isEditing, setisEditing] = useState(false);
   const [Text, setText] = useState("Edit");
+  const [charId, setCharId] = useState<number>(0);
+  const [person, _setPerson] = useState<IPerson>();
+  const setPerson = (person: IPerson) => {
+    _setPerson(person);
+    dispatch({type:"UpdateCharacter",payload:person});
+  }
 
-  const [person, setPerson] = useState<IPerson>({
-    name: "name",
-    surname: "surname",
-    patronymic: "patronymic",
-    birth: new TimelineDate(0, 0, 0, 0, 0, 0),
-    death: new TimelineDate(0, 0, 0, 0, 0, 0),
-  });
+  if(!characters) return (<h2>NOT INISALIZED</h2>)
+  const character = characters.find(v => v.id.valueOf() === charId)
+  if (!character) return (<div >
+    <h2>CHARACTER UNFOUND</h2>
+    <button onClick={()=>{
+          dispatch({type:"GenearateDynasty"})
+        }}>GENERATE DYNASTY</button>
+    </div>)
+  if(person != character) setPerson(character);
 
+  if (!person) return (<h2>PERSON IS NULL</h2>)
   function handleClick() {
     if (isEditing) {
       setisEditing(false);
@@ -62,10 +77,10 @@ function Characteristics() {
         handleChange={(e) => {
           let obj = new TimelineDate(0, 0, 0, 0, 0, 0);
           Object.assign(obj, person.birth);
-          obj.changeDateString(e.target.value);
+          TimelineDate.changeDateString(obj,e.target.value);
           setPerson({ ...person, birth: obj });
         }}
-        showString={person.birth.returnDateAsString()}
+        showString={TimelineDate.returnDateAsString(person.birth)}
       />
       <FieldCharacteristic
         fieldName={"Death Date: "}
@@ -76,14 +91,14 @@ function Characteristics() {
             if (typeof person.death == "object") {
               Object.assign(obj, person.death);
             }
-            obj.changeDateString(e.target.value);
+            TimelineDate.changeDateString(obj,e.target.value);
             setPerson({ ...person, death: obj });
           } else {
             setPerson({ ...person, death: null });
           }
         }}
         showString={
-          person.death ? person.death.returnDateAsString() : "not dead yet"
+          person.death ? TimelineDate.returnDateAsString(person.death) : "not dead yet"
         }
       />
     </div>

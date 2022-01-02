@@ -1,3 +1,4 @@
+import Id from "../Id";
 import TimelineDate from "../TimelineDate";
 
 interface IPerson {
@@ -9,7 +10,7 @@ interface IPerson {
     death                       :TimelineDate | null;
     childCount                  :number;
     
-    id                          :number;
+    id                          :Id;
     _awaitedCildCount           :number,
 }
 

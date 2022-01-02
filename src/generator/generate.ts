@@ -1,26 +1,46 @@
 import IPerson from '../types/interfaces/IPerson';
 import TimelineDate from '../types/TimelineDate';
 import NameGen from './namegen'
+import Id from "../types/Id"
 type relationType = "merried" | "child";
 
+ 
 
 class CharactersArray{
-    main                        :Array<IPerson>;
-    secondary                   :Array<IPerson>;
-    constructor(){
-        this.main = new Array<IPerson>();
-        this.secondary = new Array<IPerson>();
+    dynastyid                   :number;
+    memberCount                 :number;
+    main                        :Map<Id,IPerson>;
+    secondary                   :Map<Id,IPerson>;
+    constructor(dynastyid:number){
+        this.dynastyid = dynastyid
+        this.memberCount = 0;
+        this.main      = new Map<Id,IPerson>();
+        this.secondary = new Map<Id,IPerson>();
     }
     get all(){
-        return [...this.main,...this.secondary]
+        return [...this.main.values(),...this.secondary.values()]
     }
-    findByID(id:number){
-        let person = this.main.find(val => val.id === id);
-        if(person) return person;
-        person = this.secondary.find(val => val.id === id)
-        if(person) return person;
-        return undefined;
+    add(character: IPerson){
+        if(character.id.dynastyid == this.dynastyid) this.memberCount++;
+        this.update(character)
     }
+    update(character: IPerson){
+        if(character.id.dynastyid == this.dynastyid) return this.main.set(character.id,character)
+        return this.secondary.set(character.id,character)
+    }
+    find(id:Id){
+        if(id.dynastyid == this.dynastyid) return this.main.get(id)
+        return this.secondary.get(id)
+    }
+    delete(id:Id){
+        if(id.dynastyid == this.dynastyid) return this.main.delete(id)
+        return this.secondary.delete(id)
+    }
+    clear(){
+        this.main      = new Map<Id,IPerson>();
+        this.secondary = new Map<Id,IPerson>();
+    }
+
 }
 interface IGeneratorParams{
     DYNASTY_NAME                :string | undefined,
@@ -42,8 +62,8 @@ const DEFAULT_PARAMS = {
     MAX_RANDOM_NUM              :1447649678,
     DEBUG                       :0
 }
-class Generator {
-    private idCounter           :number  = 0;
+interface IGenData{
+    idCounter                   :number;
     nameGen                     :NameGen.NameGenerator;
     dynNameGen                  :NameGen.NameGenerator;
     dynasty                     :string;
@@ -51,33 +71,52 @@ class Generator {
     foundingDate                :TimelineDate;
     dynastys                    :Array<string>;
     characters                  :CharactersArray;
-    links                       :Array<{from:number,to:number,type:relationType}>;
+    links                       :Array<{from:Id,to:Id,type:relationType}>;
 
-    _pseudorandom:()=>number;
-    constructor(nameTemplate:string,seed:number,options: IGeneratorParams = DEFAULT_PARAMS,foundingDate:TimelineDate = new TimelineDate(0,0,0,0,0,0)) {
-        this.nameGen            = new NameGen.NameGenerator(nameTemplate);
-        this.dynNameGen         = new NameGen.NameGenerator(nameTemplate);
-        this.dynastys           = new Array<string>();
-        this.characters         = new CharactersArray();
-        this.links              = new Array<{from:number,to:number,type:relationType}>();
-        this.options            = options;
-        this.foundingDate       = foundingDate;
+    _pseudorandom               :()=>number;
+}
+class Generator implements IGenData{
+    idCounter                   :number  = 0;
+    nameGen                     !:NameGen.NameGenerator;
+    dynNameGen                  !:NameGen.NameGenerator;
+    dynasty                     !:string;
+    options                     !:IGeneratorParams;
+    foundingDate                !:TimelineDate;
+    dynastys                    !:Array<string>;
+    characters                  !:CharactersArray;
+    links                       !:Array<{from:Id,to:Id,type:relationType}>;
 
-        this._pseudorandom = function() {
-            var t = seed += 0x6D2B79F5;
-            t = Math.imul(t ^ t >>> 15, t | 1);
-            t ^= t + Math.imul(t ^ t >>> 7, t | 61);
-            const ret = ((t ^ t >>> 14) >>> 0) / 4294967296;
-            this.options.DEBUG >= 3 && console.log(ret);
-            return ret;
-        }
-        this.dynasty = this.options.DYNASTY_NAME?this.options.DYNASTY_NAME:this.dynNameGen.toString(this._pseudorandom());        
+    _pseudorandom               !:()=>number;
+
+    constructor(nameTemplate:string | IGenData,seed:number = Math.random(),options: IGeneratorParams = DEFAULT_PARAMS,foundingDate:TimelineDate = new TimelineDate(0,0,0,0,0,0)) {
+        if(typeof nameTemplate === "string") {
+            this.nameGen            = new NameGen.NameGenerator(nameTemplate);
+            this.dynNameGen         = new NameGen.NameGenerator(nameTemplate);
+            this.dynastys           = new Array<string>();
+            this.characters         = new CharactersArray(0);
+            this.links              = new Array<{from:Id,to:Id,type:relationType}>();
+            this.options            = options;
+            this.foundingDate       = foundingDate;
+            
+            this._pseudorandom = function() {
+                var t = seed += 0x6D2B79F5;
+                t = Math.imul(t ^ t >>> 15, t | 1);
+                t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+                const ret = ((t ^ t >>> 14) >>> 0) / 4294967296;
+                this.options.DEBUG >= 3 && console.log(ret);
+                return ret;
+            }
+            this.dynasty = this.options.DYNASTY_NAME?this.options.DYNASTY_NAME:this.dynNameGen.toString(this._pseudorandom());  
+            return      
+        } 
+        Object.assign(this,nameTemplate);
     }
     private IPersonFactory(name:string, surname:string, patronymic:string, birth:TimelineDate, death:null | TimelineDate, _awaitedCildCount: number,isMale:boolean = Boolean(this._randint() % 2)):IPerson{
+        const id = this.dynasty == surname?0:this.dynastys.findIndex(v=>v === surname)
         return {
             name,surname,patronymic,birth,death,
             _awaitedCildCount,isMale,
-            id:this.idCounter++,
+            id:new Id(id,this.idCounter++),
             childCount:0
         }
     }
@@ -136,8 +175,8 @@ class Generator {
         }
         return this.dynastys[idx]
     }
-    private _findMerried(id:number){
-        return this.links.find((value)=>(value.from == id  || value.to == id) && value.type == "merried")
+    private _findMerried(id:Id){
+        return this.links.find((value)=>(value.from.valueOf() == id.valueOf()  || value.to.valueOf() == id.valueOf()) && value.type == "merried")
     }
     private _logChararacterData(character:IPerson,role:"founder" | "wifu" | "child",...args:IPerson[]){
         let prefix = "UNKNOWN"
@@ -153,18 +192,18 @@ class Generator {
      * produce
      */
     public produce():IPerson {
-        if(!this.characters.main.length){
+        if(!this.characters.memberCount){
             const name       = this.nameGen.toString(this._pseudorandom());
             const surname    = this.dynasty;
             const patronymic = this.nameGen.toString(this._pseudorandom())
             const founder = this.IPersonFactory(name,surname, patronymic, this.foundingDate, null,this._randint() % 3 + 1)
             founder.death = this._createDeathTimelineDate(founder);
-            this.characters.main.push(founder);
+            this.characters.add(founder);
             this.options.DEBUG && this._logChararacterData(founder,"founder");
             this.options.DEBUG>=2 && console.log(founder.birth);
             return founder;
         }
-        const person = this._randomFromArray(this.characters.main);
+        const person = this._randomFromArray([...this.characters.main.values()]);
         const marriege = this._findMerried(person.id)
         if(!marriege){
             const name       = this.nameGen.toString(this._pseudorandom());
@@ -172,21 +211,21 @@ class Generator {
             const patronymic = this.nameGen.toString(this._pseudorandom())
             const wifu = this.IPersonFactory(name,surname, patronymic,this._createPeerTimlineDate(person.birth),null,0,!person.isMale)
             wifu.death = this._createDeathTimelineDate(wifu);
-            this.characters.secondary.push(wifu);
+            this.characters.add(wifu);
             this.links.push({from:person.id,to:wifu.id,type:"merried"});
             this.options.DEBUG && this._logChararacterData(wifu,"wifu",person);
             this.options.DEBUG>=2 && console.log(wifu.birth);
             return wifu;
         }
         //TODO Check all characters can have children
-        const wifu    = this.characters.findByID(marriege.to)!;
+        const wifu    = this.characters.find(marriege.to)!;
         const name    = this.nameGen.toString(this._pseudorandom());
         const surname = this.dynasty;
         const patronymic = person.name;
         const child = this.IPersonFactory(name,surname, patronymic,this._createChildTimelineDate([person.birth,wifu.birth]),null,this._randint() % 3 + 1)
 
         child.death = this._createDeathTimelineDate(child);
-        this.characters.main.push(child);
+        this.characters.add(child);
 
         this.links.push({from:person.id,to:child.id,type:"child"});
         this.links.push({from:marriege.to,to:child.id,type:"child"});
@@ -195,6 +234,26 @@ class Generator {
         this.options.DEBUG>=2 && console.log(child.birth);
 
         return child;
+    }
+    get data():IGenData{
+        return {...this}
+    }
+    /**
+     * generateCharacters     
+     */
+    public generateDynasty(count:number) {
+        for (let index = 0; index < count - 1; index++)
+            this.produce()
+        return this.characters.all
+    }
+    public updateCharacter(char: IPerson){
+        this.characters.update(char)
+    }
+    public addCharacter(char: IPerson){
+        this.characters.add(char)
+    }
+    public deleteCharacter(id:Id){
+        this.characters.delete(id);
     }
 
 }

@@ -1,9 +1,10 @@
 import React from "react";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import Characteristics from "../Characteristics/Characteristics";
 import { store } from "../../storage/store";
 import TreeEditor from "../TreeEditor/TreeEditor";
 import "./App.css";
+import { useTypedDispatch } from "../../hooks/useTypedDispatch";
 
 function App() {
   return (

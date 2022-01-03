@@ -33,7 +33,8 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = () => {
             setGraph({...curGraph});
             setGraphKey(graphKey+1);
         }
-    }, [nodes, edges, graphKey])
+        // eslint-disable-next-line
+    }, [nodes, edges])
 
     if (!nodes || !edges)
         return <h1>

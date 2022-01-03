@@ -4,7 +4,7 @@ import IPerson from "../../types/interfaces/IPerson";
 import ICharacterAction from "../actions/characterActions";
 
 type CharacterState = Array<IPerson>;
-export const gena = new Generator("VV",Math.random()*10000000)
+export const gena = new Generator("sV",Math.random()*10000000)
 const charDefaultState: CharacterState = gena.characters.all;
 
 export const characterReducer: Reducer<CharacterState | undefined,ICharacterAction> = (state=charDefaultState,action) => {

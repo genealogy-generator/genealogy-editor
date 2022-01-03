@@ -1,22 +1,24 @@
 {
   "files": {
-    "main.css": "/genealogy-editor/static/css/main.49612dbb.chunk.css",
-    "main.js": "/genealogy-editor/static/js/main.b4b73069.chunk.js",
-    "main.js.map": "/genealogy-editor/static/js/main.b4b73069.chunk.js.map",
-    "runtime-main.js": "/genealogy-editor/static/js/runtime-main.efd28c39.js",
-    "runtime-main.js.map": "/genealogy-editor/static/js/runtime-main.efd28c39.js.map",
-    "static/js/2.7f6cf971.chunk.js": "/genealogy-editor/static/js/2.7f6cf971.chunk.js",
-    "static/js/2.7f6cf971.chunk.js.map": "/genealogy-editor/static/js/2.7f6cf971.chunk.js.map",
-    "static/js/3.e83aa949.chunk.js": "/genealogy-editor/static/js/3.e83aa949.chunk.js",
-    "static/js/3.e83aa949.chunk.js.map": "/genealogy-editor/static/js/3.e83aa949.chunk.js.map",
+    "main.css": "/genealogy-editor/static/css/main.9b41eeda.chunk.css",
+    "main.js": "/genealogy-editor/static/js/main.817b1055.chunk.js",
+    "main.js.map": "/genealogy-editor/static/js/main.817b1055.chunk.js.map",
+    "runtime-main.js": "/genealogy-editor/static/js/runtime-main.8c3020fe.js",
+    "runtime-main.js.map": "/genealogy-editor/static/js/runtime-main.8c3020fe.js.map",
+    "static/js/2.b80953ee.chunk.js": "/genealogy-editor/static/js/2.b80953ee.chunk.js",
+    "static/js/2.b80953ee.chunk.js.map": "/genealogy-editor/static/js/2.b80953ee.chunk.js.map",
+    "static/js/3.fb17bb78.chunk.js": "/genealogy-editor/static/js/3.fb17bb78.chunk.js",
+    "static/js/3.fb17bb78.chunk.js.map": "/genealogy-editor/static/js/3.fb17bb78.chunk.js.map",
     "index.html": "/genealogy-editor/index.html",
-    "static/css/main.49612dbb.chunk.css.map": "/genealogy-editor/static/css/main.49612dbb.chunk.css.map",
-    "static/js/2.7f6cf971.chunk.js.LICENSE.txt": "/genealogy-editor/static/js/2.7f6cf971.chunk.js.LICENSE.txt"
+    "static/css/main.9b41eeda.chunk.css.map": "/genealogy-editor/static/css/main.9b41eeda.chunk.css.map",
+    "static/js/2.b80953ee.chunk.js.LICENSE.txt": "/genealogy-editor/static/js/2.b80953ee.chunk.js.LICENSE.txt",
+    "static/media/backgnd.184ad726.jpg": "/genealogy-editor/static/media/backgnd.184ad726.jpg",
+    "static/media/TreeDrawer.css": "/genealogy-editor/static/media/cat.0068cdfb.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.efd28c39.js",
-    "static/js/2.7f6cf971.chunk.js",
-    "static/css/main.49612dbb.chunk.css",
-    "static/js/main.b4b73069.chunk.js"
+    "static/js/runtime-main.8c3020fe.js",
+    "static/js/2.b80953ee.chunk.js",
+    "static/css/main.9b41eeda.chunk.css",
+    "static/js/main.817b1055.chunk.js"
   ]
 }

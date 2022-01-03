@@ -9,7 +9,7 @@ import './App.css';
 function App() {
   return (
     <Provider store={store}>
-        <TreeEditor width={300} height={300} />
+        <TreeEditor/>
         <div className="App">
       <header className="App-header">
         <h1>Лишнее удалено</h1>

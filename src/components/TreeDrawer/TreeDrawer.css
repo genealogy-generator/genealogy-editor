@@ -5,6 +5,9 @@
     background-color: #61dafb;
 }
 
-#gr {
-    background-color: #61dafb;
+.graphStyle {
+    background: url("../../media/cat.jpg");
+    background-size: cover;
+    height: 100%;
+    width: 100%;
 }

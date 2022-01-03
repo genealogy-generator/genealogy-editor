@@ -1,8 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import {TreeActionTypes } from "../../storage/actions/treeAction";
-import TimelineDate from "../../types/TimelineDate";
+import "./TreeDrawer.css";
 import backgndImage from "../../media/backgnd.jpg";
 
 // @ts-ignore
@@ -56,42 +55,24 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
         edges: {
             color: "#000000"
         },
-        height: "600px",
+        height: "1163px", //image height
         width: "80%",
-        nodes: {
-            image: "../../media/cat.jpg",
-            /*color: {
-                background: '#00FF00'
-            },*/
-        }
-
-        //backgroundImage: `url(${backgndImage})` "../../media/backgnd.jpg"
     };
 
     return (
         <div id="TreeDrawer">
-            {/*<img src={backgndImage} alt={"background"}/>*/}
             <Graph
+                style={{
+                    backgroundImage: `url(${backgndImage})`,
+                    backgroundSize: "cover",
+                    height: "100%",
+                    width: "100%"}}
                 key = {graphKey}
                 graph={graph}
                 options={options}
                 events={events}
                 getNetwork={() => {}}
-                style={{backgroundImage: `url(${backgndImage})`,
-                    backgroundSize: "cover",height: "100%",width: "100%"}}
             />
-
-            <button onClick={()=>{
-                dispach({
-                    type:TreeActionTypes.CREATE_NODE,payload:{
-                        object:{
-                            birth: new TimelineDate(0,0,Math.round(Math.random()*Number(props.width)),0,0,0),
-                            relations:[],
-                            type:"character"
-                        },
-                        type:"",
-                    }})
-            }}></button>
         </div>
     );
 }

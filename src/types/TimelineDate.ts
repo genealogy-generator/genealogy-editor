@@ -1,7 +1,16 @@
 import { daysInYear } from "../constant";
 import { daysInMonth } from "../constant";
 
-class TimelineDate {
+interface ITimelineDate{
+  day: number,
+  month: number,
+  year: number,
+  startTimelineDay: number,
+  startTimelineMonth: number,
+  startTimelineYear: number
+}
+
+class TimelineDate implements ITimelineDate {
   day;
   month;
   year;
@@ -26,44 +35,44 @@ class TimelineDate {
   }
 
   // возвращает время в днях с начала timeline
-  timeInDaysFromStart(): number {
-    let years = this.year - this.startTimelineYear;
-    let months = this.month - this.startTimelineMonth;
-    let days = this.day - this.startTimelineDay;
+  static timeInDaysFromStart(td:TimelineDate | ITimelineDate,): number {
+    let years = td.year - td.startTimelineYear;
+    let months = td.month - td.startTimelineMonth;
+    let days = td.day - td.startTimelineDay;
     return years * daysInYear * daysInMonth + months * daysInMonth + days;
   }
 
   // изменяет дату начала таймлайна(если пользователь изменил дату, например)
-  changeStartTimelineDate(day: number, month: number, year: number) {
-    this.startTimelineDay = day;
-    this.startTimelineMonth = month;
-    this.startTimelineYear = year;
+  static changeStartTimelineDate(td:TimelineDate | ITimelineDate,day: number, month: number, year: number) {
+    td.startTimelineDay = day;
+    td.startTimelineMonth = month;
+    td.startTimelineYear = year;
   }
 
   // изменяет дату(если пользователь изменил дату)
-  changeDate(day: number, month: number, year: number) {
-    this.day = day;
-    this.month = month;
-    this.year = year;
+  static changeDate(td:TimelineDate | ITimelineDate,day: number, month: number, year: number) {
+    td.day = day;
+    td.month = month;
+    td.year = year;
   }
 
   //изменяет дату, на вход подаётся строка day.month.year
-  changeDateString(str: string) {
+  static changeDateString(td:TimelineDate | ITimelineDate,str: string) {
     let arr = str.split(".");
     if (arr.length === 1) {
-      this.day = Number(arr[0]);
+      td.day = Number(arr[0]);
     } else if (arr.length === 2) {
-      this.day = Number(arr[0]);
-      this.month = Number(arr[1]);
+      td.day = Number(arr[0]);
+      td.month = Number(arr[1]);
     } else {
-      this.day = Number(arr[0]);
-      this.month = Number(arr[1]);
-      this.year = Number(arr[2]);
+      td.day = Number(arr[0]);
+      td.month = Number(arr[1]);
+      td.year = Number(arr[2]);
     }
   }
   // возващает дату как строку
-  returnDateAsString(): string {
-    return `${this.day}.${this.month}.${this.year}`;
+  static returnDateAsString(td:TimelineDate | ITimelineDate): string {
+    return `${td.day}.${td.month}.${td.year}`;
   }
 }
 

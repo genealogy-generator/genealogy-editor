@@ -39,7 +39,7 @@ jobs:
       run: npm run build
 
     - name: Run the tests and generate coverage report
-      run: npm test -- --coverage
+      run: npm test -- --coverage --passWithNoTests
       
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1

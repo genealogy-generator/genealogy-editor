@@ -4,7 +4,7 @@ import NameGen from './namegen'
 import Id from "../types/Id"
 type relationType = "merried" | "child";
 
- 
+export interface IGenaLink {from:Id,to:Id,type:relationType}
 
 class CharactersArray{
     dynastyid                   :number;
@@ -71,7 +71,7 @@ interface IGenData{
     foundingDate                :TimelineDate;
     dynastys                    :Array<string>;
     characters                  :CharactersArray;
-    links                       :Array<{from:Id,to:Id,type:relationType}>;
+    links                       :Array<IGenaLink>;
 
     _pseudorandom               :()=>number;
 }
@@ -84,7 +84,7 @@ class Generator implements IGenData{
     foundingDate                !:TimelineDate;
     dynastys                    !:Array<string>;
     characters                  !:CharactersArray;
-    links                       !:Array<{from:Id,to:Id,type:relationType}>;
+    links                       !:Array<IGenaLink>;
 
     _pseudorandom               !:()=>number;
 
@@ -94,7 +94,7 @@ class Generator implements IGenData{
             this.dynNameGen         = new NameGen.NameGenerator(nameTemplate);
             this.dynastys           = new Array<string>();
             this.characters         = new CharactersArray(0);
-            this.links              = new Array<{from:Id,to:Id,type:relationType}>();
+            this.links              = new Array<IGenaLink>();
             this.options            = options;
             this.foundingDate       = foundingDate;
             

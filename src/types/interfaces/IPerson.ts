@@ -14,4 +14,17 @@ interface IPerson {
     _awaitedCildCount           :number,
 }
 
+export interface IGraphNode{
+    id   : number,
+    label: string,
+    title: string
+}
+export function IPersonAsINode(person:IPerson):IGraphNode{
+    return {
+        id: person.id.valueOf(),
+        label:`${person.name} ${person.surname} ${person.patronymic}`,
+        title:`${person.name} ${person.surname} ${person.patronymic}`
+    }
+}
+
 export default IPerson

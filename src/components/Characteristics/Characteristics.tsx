@@ -28,6 +28,7 @@ function Characteristics() {
     <h2>CHARACTER UNFOUND</h2>
     <button onClick={()=>{
           dispatch({type:"GenearateDynasty"})
+          dispatch({type:"UpdateLinks"})
         }}>GENERATE DYNASTY</button>
     </div>)
   if(person !== character) setPerson(character);

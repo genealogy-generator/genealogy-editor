@@ -1,3 +1,13 @@
 .TreeDrawer {
-    
+    hierarchical: true;
+    color: #000FF0;
+    height: 500px;
+    background-color: #61dafb;
+}
+
+.graphStyle {
+    background: url("../../media/cat.jpg");
+    background-size: cover;
+    height: 100%;
+    width: 100%;
 }

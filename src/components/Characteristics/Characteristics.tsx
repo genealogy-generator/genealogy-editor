@@ -9,21 +9,19 @@ import { useTypedDispatch } from "../../hooks/useTypedDispatch";
 function Characteristics() {
   // начальную инициализацию нужно изменить при загрузке персонажа
   const characters = useTypedSelector(state => state.characters)
+  const charId     = useTypedSelector(state => state.app?.editedId)
+  const isEditing  = useTypedSelector(state => state.app?.isEditing)
   const dispatch = useTypedDispatch()
 
-  const [isEditing, setisEditing] = useState(false);
   const [Text, setText] = useState("Edit");
   //Move id to redux storage
-  // eslint-disable-next-line
-  const [charId, setCharId] = useState<number>(0);
-  const [person, _setPerson] = useState<IPerson>();
-  const setPerson = (person: IPerson) => {
-    _setPerson(person);
-    dispatch({type:"UpdateCharacter",payload:person});
+  const [person, setPerson] = useState<IPerson>();
+  if(typeof isEditing === "undefined") {
+    dispatch({type:"SwitchEditCharacter",payload:true})
+    return (<h2>NOT INISALIZED</h2>)
   }
-
   if(!characters) return (<h2>NOT INISALIZED</h2>)
-  const character = characters.find(v => v.id.valueOf() === charId)
+  const character = characters.find(v => v.id.valueOf() === (charId?charId.valueOf():0))
   if (!character) return (<div >
     <h2>CHARACTER UNFOUND</h2>
     <button onClick={()=>{
@@ -31,15 +29,20 @@ function Characteristics() {
           dispatch({type:"UpdateLinks"})
         }}>GENERATE DYNASTY</button>
     </div>)
-  if(person !== character) setPerson(character);
+  if(!person) {
+    setPerson(character);
+    return (<h2>PERSON IS NULL</h2>)
+  }
+  if(person.id.valueOf() !== character.id.valueOf()) setPerson(character);
 
-  if (!person) return (<h2>PERSON IS NULL</h2>)
   function handleClick() {
     if (isEditing) {
-      setisEditing(false);
+      console.log(person);
+      dispatch({type:"UpdateCharacter",payload:person});
+      dispatch({type:"SwitchEditCharacter",payload:false})
       setText("Edit");
     } else {
-      setisEditing(true);
+      dispatch({type:"SwitchEditCharacter",payload:true})
       setText("Save");
     }
   }

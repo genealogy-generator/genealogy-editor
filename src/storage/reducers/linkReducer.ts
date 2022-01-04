@@ -1,14 +1,15 @@
 import { Reducer } from "redux";
+import { IGenaLink } from "../../generator/generate";
 import { IGenaLinkAsILink, ILink } from "../../types/interfaces/ILink";
 import IUpdateLinkAction from "../actions/linkActions";
 import { gena } from "./characterReducer";
 
 
-type ILinkState = Array<ILink>
+type ILinkState = Array<IGenaLink>
 const linkDefaultState: ILinkState = []
 export const linksReducer: Reducer<ILinkState | undefined,IUpdateLinkAction> = (state = linkDefaultState, action) => {
     switch (action.type) {
-        case "UpdateLinks"               : return [...gena.links.filter(v => v.type === "child").map(IGenaLinkAsILink)];
+        case "UpdateLinks"               : return [...gena.links];
         default                         : return state;
     }
 }

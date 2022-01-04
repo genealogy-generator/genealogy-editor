@@ -5,7 +5,9 @@ import backgndImage from "../../media/backgnd.jpg";
 
 // @ts-ignore
 import Graph from "react-graph-vis"
-import { IPersonAsINode } from "../../types/interfaces/IPerson";
+import { IGraphNode, IPersonAsINode } from "../../types/interfaces/IPerson";
+import { IGenaLinkAsILink, ILink } from "../../types/interfaces/ILink";
+import { useTypedDispatch } from "../../hooks/useTypedDispatch";
 
 export interface ITreeDrawerProps {
     width?:number;
@@ -15,6 +17,8 @@ export interface ITreeDrawerProps {
 const TreeDrawer: React.FC<ITreeDrawerProps> = () => {
     const nodes   = useTypedSelector(state => state.characters); //graph
     const edges   = useTypedSelector(state => state.links);
+
+    const dispach = useTypedDispatch();
 
     let graphDefault: {nodes: Array<any>, edges: Array<any>} = {
         nodes: [],
@@ -26,9 +30,9 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = () => {
 
     useEffect(()=> {
         if (nodes && edges) {
-            let curGraph: { nodes: Array<any>, edges: Array<any> } = {
-                nodes: [...nodes.map(IPersonAsINode)],
-                edges: [...edges]
+            let curGraph: { nodes: Array<IGraphNode>, edges: Array<ILink> } = {
+                nodes: [...nodes.filter(v => v.id.dynastyid === 0).map(IPersonAsINode)],
+                edges: [...edges.filter(v => v.from.dynastyid === 0 && v.type === "child").map(IGenaLinkAsILink)]
             };
             setGraph({...curGraph});
             setGraphKey(graphKey+1);
@@ -44,19 +48,24 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = () => {
     const events = {
         select: function(event: any) {
             // eslint-disable-next-line
-            var { nodes, edges } = event;
+            var { nodes }: {nodes:Array<any>} = event;
+            if(typeof nodes === typeof [] && nodes.length === 1)
+                dispach({type:"SelectCharacter",payload:nodes[0]})
         }
     };
 
     const options = {
         layout: {
-            hierarchical: true
+            hierarchical: {
+                enabled:true,
+                sortMethod:'directed'
+            },
         },
         edges: {
             color: "#000000"
         },
-        height: "1163px", //image height
-        width: "80%",
+        height: "1163px",
+        width: "100%",
     };
 
     return (
@@ -66,7 +75,7 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = () => {
                     backgroundImage: `url(${backgndImage})`,
                     backgroundSize: "cover",
                     height: "100%",
-                    width: "100%"}}
+                    width:  "100%"}}
                 key = {graphKey}
                 graph={graph}
                 options={options}

@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { applicationReducer } from './reducers/applicationReducer';
 import { characterReducer } from './reducers/characterReducer';
 import { linksReducer } from './reducers/linkReducer';
 
@@ -6,7 +7,8 @@ import { linksReducer } from './reducers/linkReducer';
 export const store = configureStore({
     reducer:{
         links:linksReducer,
-        characters:characterReducer
+        characters:characterReducer,
+        app:applicationReducer
     }
 })
 

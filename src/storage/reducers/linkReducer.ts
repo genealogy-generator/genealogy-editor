@@ -1,6 +1,5 @@
 import { Reducer } from "redux";
 import { IGenaLink } from "../../generator/generate";
-import { IGenaLinkAsILink, ILink } from "../../types/interfaces/ILink";
 import IUpdateLinkAction from "../actions/linkActions";
 import { gena } from "./characterReducer";
 

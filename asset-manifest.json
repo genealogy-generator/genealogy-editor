@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/genealogy-editor/static/css/main.9b41eeda.chunk.css",
-    "main.js": "/genealogy-editor/static/js/main.5051fc5b.chunk.js",
-    "main.js.map": "/genealogy-editor/static/js/main.5051fc5b.chunk.js.map",
+    "main.css": "/genealogy-editor/static/css/main.f0b0838c.chunk.css",
+    "main.js": "/genealogy-editor/static/js/main.02444cab.chunk.js",
+    "main.js.map": "/genealogy-editor/static/js/main.02444cab.chunk.js.map",
     "runtime-main.js": "/genealogy-editor/static/js/runtime-main.8c3020fe.js",
     "runtime-main.js.map": "/genealogy-editor/static/js/runtime-main.8c3020fe.js.map",
-    "static/js/2.b80953ee.chunk.js": "/genealogy-editor/static/js/2.b80953ee.chunk.js",
-    "static/js/2.b80953ee.chunk.js.map": "/genealogy-editor/static/js/2.b80953ee.chunk.js.map",
+    "static/js/2.b602f0c0.chunk.js": "/genealogy-editor/static/js/2.b602f0c0.chunk.js",
+    "static/js/2.b602f0c0.chunk.js.map": "/genealogy-editor/static/js/2.b602f0c0.chunk.js.map",
     "static/js/3.fb17bb78.chunk.js": "/genealogy-editor/static/js/3.fb17bb78.chunk.js",
     "static/js/3.fb17bb78.chunk.js.map": "/genealogy-editor/static/js/3.fb17bb78.chunk.js.map",
     "index.html": "/genealogy-editor/index.html",
-    "static/css/main.9b41eeda.chunk.css.map": "/genealogy-editor/static/css/main.9b41eeda.chunk.css.map",
-    "static/js/2.b80953ee.chunk.js.LICENSE.txt": "/genealogy-editor/static/js/2.b80953ee.chunk.js.LICENSE.txt",
+    "static/css/main.f0b0838c.chunk.css.map": "/genealogy-editor/static/css/main.f0b0838c.chunk.css.map",
+    "static/js/2.b602f0c0.chunk.js.LICENSE.txt": "/genealogy-editor/static/js/2.b602f0c0.chunk.js.LICENSE.txt",
     "static/media/backgnd.184ad726.jpg": "/genealogy-editor/static/media/backgnd.184ad726.jpg",
     "static/media/TreeDrawer.css": "/genealogy-editor/static/media/cat.0068cdfb.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.8c3020fe.js",
-    "static/js/2.b80953ee.chunk.js",
-    "static/css/main.9b41eeda.chunk.css",
-    "static/js/main.5051fc5b.chunk.js"
+    "static/js/2.b602f0c0.chunk.js",
+    "static/css/main.f0b0838c.chunk.css",
+    "static/js/main.02444cab.chunk.js"
   ]
 }

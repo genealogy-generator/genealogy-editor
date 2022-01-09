@@ -1,0 +1,1 @@
+export type OnChangeFunction = (e: React.ChangeEvent<HTMLInputElement>) => void;

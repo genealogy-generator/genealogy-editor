@@ -1,9 +1,11 @@
+import {cat} from "../components/TreeDrawer/cat";
+
 export const options = {
     layout: {
         hierarchical: {
             direction: 'UD',
             sortMethod: 'directed',
-            nodeSpacing: 150
+            nodeSpacing: 100
         }
     },
     edges: {
@@ -14,7 +16,7 @@ export const options = {
 
     },
     nodes: {
-        shape: "box",
+        shape: "circularImage",
         borderWidth: 1,
         color: {
             border: "#000000",
@@ -25,5 +27,5 @@ export const options = {
         }
     },
     height: "1163px", //image height
-    width: "80%",
+    width: "100%",
 };

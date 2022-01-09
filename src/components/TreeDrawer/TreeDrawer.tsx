@@ -1,22 +1,27 @@
-import React, {useEffect, useRef, useState} from "react";
-import { useDispatch } from "react-redux";
+import React, {useEffect, useState} from "react"; // useRef ?
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import "./TreeDrawer.css";
 import backgndImage from "../../media/backgnd.jpg";
 
 // @ts-ignore
 import Graph from "react-graph-vis"
+
 import {options} from "../../types/graphSettings";
-import {cat} from "./cat";
+import { IGraphNode, IPersonAsINode } from "../../types/interfaces/IPerson";
+import { IGenaLinkAsILink, ILink } from "../../types/interfaces/ILink";
+import { useTypedDispatch } from "../../hooks/useTypedDispatch";
 
 export interface ITreeDrawerProps {
     width?:number;
     height?:number;
 };
 
-const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
-    const nodes   = useTypedSelector(state => state.tree?.nodes); //graph
-    const edges   = useTypedSelector(state => state.tree?.edges);
+
+const TreeDrawer: React.FC<ITreeDrawerProps> = () => {
+    const nodes   = useTypedSelector(state => state.characters); //graph
+    const edges   = useTypedSelector(state => state.links);
+
+    const dispach = useTypedDispatch();
 
     let graphDefault: {nodes: Array<any>, edges: Array<any>} = {
         nodes: [],
@@ -27,22 +32,17 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
     const [graphKey, setGraphKey] = useState(0);
 
     useEffect(()=> {
-        if (nodes && edges) {
+        if (nodes && edges) { //title generate in Iperson
 
-            for (let i = 0; i < nodes.length; i++) {
-                nodes[i].label = nodes[i].person.name + " " + nodes[i].person.surname;
-                //nodes[i].image = require("../../media/cat.jpg");
-            }
-            let curGraph: { nodes: Array<any>, edges: Array<any> } = {
-                nodes: [...nodes],
-                edges: [...edges]
+            let curGraph: { nodes: Array<IGraphNode>, edges: Array<ILink> } = {
+                nodes: [...nodes.filter(v => v.id.dynastyid === 0).map(IPersonAsINode)],
+                edges: [...edges.filter(v => v.from.dynastyid === 0 && v.type === "child").map(IGenaLinkAsILink)]
             };
             setGraph({...curGraph});
             setGraphKey(graphKey+1);
         }
+        // eslint-disable-next-line
     }, [nodes, edges])
-
-    const dispach = useDispatch();
 
     if (!nodes || !edges)
         return <h1>
@@ -51,10 +51,12 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
 
     const events = {
         select: function(event: any) {
-            var { nodes, edges } = event;
+            // eslint-disable-next-line
+            var { nodes }: {nodes:Array<any>} = event;
+            if(typeof nodes === typeof [] && nodes.length === 1)
+                dispach({type:"SelectCharacter",payload:nodes[0]})
         }
     };
-
 
     return (
         <div id="TreeDrawer">
@@ -64,13 +66,13 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
                     backgroundSize: "cover",
                     height: "100%",
                     width: "100%"}}
+
                 key = {graphKey}
                 graph={graph}
                 options={options}
                 events={events}
                 getNetwork={() => {}}
             />
-            <img src={cat}/>
         </div>
     );
 }

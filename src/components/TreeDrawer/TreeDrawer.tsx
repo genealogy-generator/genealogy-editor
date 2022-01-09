@@ -6,6 +6,8 @@ import backgndImage from "../../media/backgnd.jpg";
 
 // @ts-ignore
 import Graph from "react-graph-vis"
+import {options} from "../../types/graphSettings";
+import {cat} from "./cat";
 
 export interface ITreeDrawerProps {
     width?:number;
@@ -26,6 +28,11 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
 
     useEffect(()=> {
         if (nodes && edges) {
+
+            for (let i = 0; i < nodes.length; i++) {
+                nodes[i].label = nodes[i].person.name + " " + nodes[i].person.surname;
+                //nodes[i].image = require("../../media/cat.jpg");
+            }
             let curGraph: { nodes: Array<any>, edges: Array<any> } = {
                 nodes: [...nodes],
                 edges: [...edges]
@@ -48,16 +55,6 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
         }
     };
 
-    const options = {
-        layout: {
-            hierarchical: true
-        },
-        edges: {
-            color: "#000000"
-        },
-        height: "1163px", //image height
-        width: "80%",
-    };
 
     return (
         <div id="TreeDrawer">
@@ -73,6 +70,7 @@ const TreeDrawer: React.FC<ITreeDrawerProps> = (props) => {
                 events={events}
                 getNetwork={() => {}}
             />
+            <img src={cat}/>
         </div>
     );
 }

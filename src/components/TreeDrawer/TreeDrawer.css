@@ -6,7 +6,7 @@
 }
 
 .graphStyle {
-    background: url("../../media/cat.jpg");
+    background: url('../../media/cat.jpg');
     background-size: cover;
     height: 100%;
     width: 100%;

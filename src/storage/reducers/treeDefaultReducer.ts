@@ -1,16 +1,26 @@
 import {Reducer} from "react";
 import {ITreeAction, TreeActionTypes} from "../actions/treeAction";
 import TimelineDate from "../../types/TimelineDate";
+import IPerson from "../../types/interfaces/IPerson";
+import {cat} from "../../components/TreeDrawer/cat";
+
+
 
 export interface Inode {
    id: number,
    label: string,
-   title: string
+   title: string,
+    person: IPerson,
+    shape?: string,
+    image: string,
+    picURL?: URL,
 }
 
 export interface Iedge {
     from: number,
-    to: number
+    to: number,
+    color?: string,
+    dashes?: boolean,
 }
 
 export interface ITreeDefaultState {
@@ -22,20 +32,62 @@ const defaultTreeDefaultState: ITreeDefaultState = {
     nodes: [
         {
             id: 1,
-            label: "node1",
-            title: "desc node1"
+            label: "",
+            title: "",
+            person: {
 
+                name: "bibao",
+                surname: "le pupani",
+                patronymic: "p",
+                birth: new TimelineDate(0,0,0,0,0,0),
+                death: null
+            },
+            shape: "circularImage",
+            image: cat,
         },
         {
             id: 2,
-            label: "node2",
-            title: "desc node2"
+            label: "",
+            title: "",
+            person: {
+
+                name: "bobaan",
+                surname: "le pupani",
+                patronymic: "pg",
+                birth: new TimelineDate(0,0,1,0,0,0),
+                death: null
+            },
+            shape: "circularImage",
+            image: cat,
+        },
+        {
+            id: 3,
+            label: "",
+            title: "",
+            person: {
+
+                name: "Леха",
+                surname: "Спицын",
+                patronymic: "pg",
+                birth: new TimelineDate(0,0,1,0,0,0),
+                death: null
+            },
+            shape: "circularImage",
+            image: cat,
+
         }
     ],
     edges: [
         {
             from: 1,
-            to: 2
+            to: 2,
+            //color: '#841281'
+        },
+        {
+            from: 1,
+            to: 3,
+            color: '#841281',
+            dashes: true
         }
     ]
 }

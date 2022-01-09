@@ -1,30 +1,48 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TimelineDate from "../../types/TimelineDate";
 import "./Characteristics.css";
+import IPerson from "../../types/interfaces/IPerson";
+import FieldCharacteristic from "../ui/FieldCharacteristic/FieldCharacteristic";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useTypedDispatch } from "../../hooks/useTypedDispatch";
 
 function Characteristics() {
-  //временно. Начальная инициализация при загрузке страницы
-  let br = new TimelineDate(0, 0, 0, 0, 0, 0);
+  // начальную инициализацию нужно изменить при загрузке персонажа
+  const characters = useTypedSelector(state => state.characters)
+  const charId     = useTypedSelector(state => state.app?.editedId)
+  const isEditing  = useTypedSelector(state => state.app?.isEditing)
+  const dispatch = useTypedDispatch()
 
-  const [isEditing, setisEditing] = useState(1);
-  const [Text, setText] = useState("Save");
-  const [name, setname] = useState("Name");
-  const [surname, setsurname] = useState("Surname");
-  const [patronymic, setpatronymic] = useState("Patronymic");
-  const [birth, setbirth] = useState(br);
-  const [death, setdeath] = useState<TimelineDate | null>(null);
+  const [Text, setText] = useState("Edit");
+  //Move id to redux storage
+  const [person, setPerson] = useState<IPerson>();
+  if(typeof isEditing === "undefined") {
+    dispatch({type:"SwitchEditCharacter",payload:true})
+    return (<h2>NOT INISALIZED</h2>)
+  }
+  if(!characters) return (<h2>NOT INISALIZED</h2>)
+  const character = characters.find(v => v.id.valueOf() === (charId?charId.valueOf():0))
+  if (!character) return (<div >
+    <h2>CHARACTER UNFOUND</h2>
+    <button onClick={()=>{
+          dispatch({type:"GenearateDynasty"})
+          dispatch({type:"UpdateLinks"})
+        }}>GENERATE DYNASTY</button>
+    </div>)
+  if(!person) {
+    setPerson(character);
+    return (<h2>PERSON IS NULL</h2>)
+  }
+  if(person.id.valueOf() !== character.id.valueOf()) setPerson(character);
 
   function handleClick() {
     if (isEditing) {
-      setisEditing(0);
+      console.log(person);
+      dispatch({type:"UpdateCharacter",payload:person});
+      dispatch({type:"SwitchEditCharacter",payload:false})
       setText("Edit");
-      //setname();
-      //setsurname();
-      //setpatromymic();
-      //setbirth();
-      //setdeath();
     } else {
-      setisEditing(1);
+      dispatch({type:"SwitchEditCharacter",payload:true})
       setText("Save");
     }
   }
@@ -34,83 +52,60 @@ function Characteristics() {
       <button onClick={handleClick} style={{ width: "100%", height: "2rem" }}>
         {Text}
       </button>
-      <div className="divCharacteristics">
-        <h4>Name: </h4>
-        {isEditing ? (
-          <input defaultValue={name} id="characteristicsName"></input>
-        ) : (
-          <h4>{name}</h4>
-        )}
-      </div>
-      <div className="divCharacteristics">
-        <h4>Surname: </h4>
-        {isEditing ? (
-          <input defaultValue={surname} id="characteristicsSurname"></input>
-        ) : (
-          <h4>{surname}</h4>
-        )}
-      </div>
-      <div className="divCharacteristics">
-        <h4>Patronymic: </h4>
-        {isEditing ? (
-          <input
-            defaultValue={patronymic}
-            id="characteristicsPatronymic"
-          ></input>
-        ) : (
-          <h4>{patronymic}</h4>
-        )}
-      </div>
-      <div className="divCharacteristics">
-        <h4>Date of birth: </h4>
-        {isEditing ? (
-          <input
-            defaultValue={
-              String(birth.day) +
-              "." +
-              String(birth.month) +
-              "." +
-              String(birth.year)
+      <FieldCharacteristic
+        fieldName={"Name: "}
+        isEditing={isEditing}
+        handleChange={(e) => {
+          setPerson({ ...person, name: e.target.value });
+        }}
+        showString={person.name}
+      />
+      <FieldCharacteristic
+        fieldName={"Surname: "}
+        isEditing={isEditing}
+        handleChange={(e) => {
+          setPerson({ ...person, surname: e.target.value });
+        }}
+        showString={person.surname}
+      />
+      <FieldCharacteristic
+        fieldName={"Patronymic: "}
+        isEditing={isEditing}
+        handleChange={(e) => {
+          setPerson({ ...person, patronymic: e.target.value });
+        }}
+        showString={person.patronymic}
+      />
+      <FieldCharacteristic
+        fieldName={"Birth Date: "}
+        isEditing={isEditing}
+        handleChange={(e) => {
+          let obj = new TimelineDate(0, 0, 0, 0, 0, 0);
+          Object.assign(obj, person.birth);
+          TimelineDate.changeDateString(obj,e.target.value);
+          setPerson({ ...person, birth: obj });
+        }}
+        showString={TimelineDate.returnDateAsString(person.birth)}
+      />
+      <FieldCharacteristic
+        fieldName={"Death Date: "}
+        isEditing={isEditing}
+        handleChange={(e) => {
+          if (e.target.value.length > 0) {
+            let obj = new TimelineDate(0, 0, 0, 0, 0, 0);
+            if (typeof person.death == "object") {
+              Object.assign(obj, person.death);
             }
-            id="characteristicsDateBirth"
-          ></input>
-        ) : (
-          <h4>
-            {String(birth.day) +
-              "." +
-              String(birth.month) +
-              "." +
-              String(birth.year)}
-          </h4>
-        )}
-      </div>
-      <div className="divCharacteristics">
-        <h4>Date of death: </h4>
-        {isEditing ? (
-          <input
-            defaultValue={
-              death
-                ? String(death.day) +
-                  "." +
-                  String(death.month) +
-                  "." +
-                  String(death.year)
-                : "present time"
-            }
-            id="characteristicsDateDeath"
-          ></input>
-        ) : (
-          <h4>
-            {death
-              ? String(death.day) +
-                "." +
-                String(death.month) +
-                "." +
-                String(death.year)
-              : "present time"}
-          </h4>
-        )}
-      </div>
+            TimelineDate.changeDateString(obj,e.target.value);
+            setPerson({ ...person, death: obj });
+          } else {
+            setPerson({ ...person, death: null });
+          }
+        }}
+        showString={
+          person.death ? TimelineDate.returnDateAsString(person.death) : "not dead yet"
+        }
+      />
     </div>
   );
 }

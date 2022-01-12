@@ -7,8 +7,9 @@ import "./App.css";
 function App() {
   return (
     <Provider store={store}>
+
       <div className="App">
-        <TreeEditor width={600} height={600} />
+        <TreeEditor/>
         <Characteristics />
       </div>
     </Provider>

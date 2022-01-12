@@ -26,9 +26,15 @@
   <component name="ChangeListManager">
     <list default="true" id="13f6c73b-0400-42a4-9a02-d0103b0797e7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/src/components/TreeDrawer/TreeDrawer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TreeDrawer/TreeDrawer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TreeDrawer/TreeDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TreeDrawer/TreeDrawer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/storage/reducers/treeDefaultReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/reducers/treeDefaultReducer.ts" afterDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/src/components/App/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TreeDrawer/TreeDrawer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TreeDrawer/TreeDrawer.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TreeDrawer/TreeDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TreeDrawer/TreeDrawer.tsx" afterDir="false" />
+>>>>>>> 6e6d5aa96a50b64f078b8d3cad6c2b9d65f4f152
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +56,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../react-js-test" />
+>>>>>>> 6e6d5aa96a50b64f078b8d3cad6c2b9d65f4f152
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -76,11 +86,37 @@
       <workItem from="1640872401584" duration="2814000" />
       <workItem from="1640947016762" duration="16000" />
       <workItem from="1641214591800" duration="3828000" />
+<<<<<<< HEAD
+      <workItem from="1641474470596" duration="3366000" />
+      <workItem from="1641560261859" duration="5122000" />
+      <workItem from="1641665887921" duration="453000" />
+      <workItem from="1641721634090" duration="2759000" />
+=======
+>>>>>>> 6e6d5aa96a50b64f078b8d3cad6c2b9d65f4f152
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+<<<<<<< HEAD
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/constant.js" />
+        <option value="$PROJECT_DIR$/src/hooks/useTypedSelector.js" />
+        <option value="$PROJECT_DIR$/src/types/TimelineDate.js" />
+        <option value="$PROJECT_DIR$/src/storage/store.js" />
+        <option value="$PROJECT_DIR$/src/types/interfaces/ITreeNode.js" />
+        <option value="$PROJECT_DIR$/src/types/interfaces/ITreeLinkRelation.js" />
+        <option value="$PROJECT_DIR$/src/types/interfaces/ITreeNodeRoot.js" />
+        <option value="$PROJECT_DIR$/src/types/interfaces/ITreeNodeCharacter.js" />
+        <option value="$PROJECT_DIR$/src/storage/actions/treeAction.js" />
+        <option value="$PROJECT_DIR$/src/storage/reducers/treeReducer.js" />
+        <option value="$PROJECT_DIR$/src/storage/reducers/treeDefaultReducer.js" />
+        <option value="$PROJECT_DIR$/src/components/TreeDrawer/TreeDrawer.js" />
+      </list>
+    </option>
+=======
+>>>>>>> 6e6d5aa96a50b64f078b8d3cad6c2b9d65f4f152
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -99,6 +135,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1641215360762" />
+<<<<<<< HEAD
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1641476845267">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1641476845267" />
+=======
+>>>>>>> 6e6d5aa96a50b64f078b8d3cad6c2b9d65f4f152
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1640612104825">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
